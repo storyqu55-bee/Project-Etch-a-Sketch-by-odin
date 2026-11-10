@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        section{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .parent-type{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 10px;
+        }
+        .typing{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-type{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border: 2px solid black;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            border: 2px solid black;
+            height: 400px;
+            width: 400px;
+        }
+
+        .grid-box{
+            box-sizing: border-box;
+            border: 1px solid white;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="parent-type" id="parent-type">
+        <input class="typing" type="text" placeholder="enter the size" id="nameInput">
+        <button class="btn-type" id="set-btn">set</button>
+    </div>
+    <section>
+        <div id="content" class="container">
+            
+        </div>
+    </section>
+
+    <script>
+        const nameInput = document.getElementById('nameInput');
+        const setBtn = document.getElementById('set-btn');
+        const box = document.querySelector('#content');
+
+        let size = null;
+        setBtn.addEventListener('click', () => {
+            
+            size = parseInt(nameInput.value);
+
+            if (isNaN(size) || size <= 0) {
+            size = 16; 
+            }
+
+            box.innerHTML = '';
+            const count = size * size;
+             for(let i = 0; i < count; i++) {
+                const gridBox = document.createElement('div');
+                gridBox.classList.add('grid-box');
+
+                gridBox.style.width = `calc(100% / ${size})`;
+                gridBox.style.height = `calc(100% / ${size})`;
+
+                gridBox.addEventListener('mouseover', () => {
+                    gridBox.style.backgroundColor = 'black';
+                });
+                box.appendChild(gridBox);
+            }
+           
+        });
+
+        
+    </script>
+</body>
+</html>
